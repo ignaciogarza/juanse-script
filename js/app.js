@@ -1,6 +1,29 @@
 const extraer = document.getElementById("iniciarExtraccion");
 const file = document.querySelector("input[type='file']");
 const menuCountries = document.getElementById("itemCountries");
+const frameContent = document.getElementById("contentEvent");
+
+// flags
+const flagAntigua =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Antigua-y-Barbuda.png";
+const flagArgentina =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Argentina.png";
+const flagBarbados =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Barbados.png";
+const flagBelize =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Belize.png";
+const flagBolivia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Bolivia.png";
+const flagBrasil =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Brasil.png";
+const flagCanada =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Canada.png";
+const flagChile =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Chile.png";
+const flagColombia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Colombia.png";
+const flagCostaRica =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
 
 let listCountries = [];
 
@@ -25,9 +48,11 @@ function getInformationFromLines(lines) {
       crateCountryList(lines[line][1]);
     }
   }
-
   //Draw HTML menu of countries
   drawMenuCountries(listCountries);
+
+  // Draw content about events
+  createCountryWithPersonProfile(lines);
 }
 
 // create contries list
@@ -51,10 +76,10 @@ function drawMenuCountries(countries) {
 
 // draw person profile by country
 
-function createPerson(persons) {
-  let countries = [];
-  console.log(persons);
+function createCountryWithPersonProfile(persons) {
   for (person in persons) {
-    countries.push(createCountries(persons[person][1]));
+    if (persons[person][1] === "Argentina") {
+      frameContent.innerHTML = "<h1>list</h1>";
+    }
   }
 }
