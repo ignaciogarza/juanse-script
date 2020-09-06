@@ -1,4 +1,7 @@
 const extraer = document.getElementById("iniciarExtraccion");
+const contenedorCodigo = document.getElementById("contenedorDirectorio");
+const copyHTML = document.getElementById("copyHTML");
+const textArea = document.getElementById("textArea");
 const file = document.querySelector("input[type='file']");
 const menuCountries = document.getElementById("itemCountries");
 const countryTitle = document.getElementById("countryTitle");
@@ -75,7 +78,7 @@ function crateCountryList(country) {
 
 function drawMenuCountries(countries) {
   for (countrie in countries) {
-    menuCountries.innerHTML += `<li><a href="#${countries[countrie]}">${countries[countrie]}</a></li>`;
+    menuCountries.innerHTML += `<li style="padding:5px; list-style:none;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
   }
 }
 
@@ -108,19 +111,20 @@ function createCountryWithPersonProfile(countries, persons) {
     }
 
     countryTitle.innerHTML += `
-    <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"><img src="${flag}" alt="" style="width: 60px; height: 61px"/></div><div class="pais" style="display: inline-block; vertical-align: top; width:90%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 0 20px; padding: 0;"  >${countries[country]}</h2></div></div>`;
+    <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"><img src="${flag}" alt="" style="width: 60px; height: 61px"/></div><div class="pais" style="display: inline-block; vertical-align: top; width:90%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;"  >${countries[country]}</h2></div></div>`;
   }
 
   let liPersonItem;
+  console.log(persons);
 
   for (person in persons) {
     if (persons[person][0] === "ACE Edition" || persons[person][0] === "") {
     } else {
-      let name = persons[person][2].replace('"""', "");
-      let currentTitle = persons[person][3].replace('"""', "");
-      let participatedAs = persons[person][4].replace('"""', "");
-      let edition = persons[person][0].replace('"""', "");
-      edition = edition.replace('"""', "");
+      let name = persons[person][2];
+      let currentTitle = persons[person][3];
+      let participatedAs = persons[person][4];
+      let website = persons[person][5];
+      let edition = persons[person][0];
 
       liPersonItem = document.createElement("li");
       liPersonItem.style.cssText =
@@ -139,11 +143,9 @@ function createCountryWithPersonProfile(countries, persons) {
       liPersonItem.innerHTML += `
       <h3 style="color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">ACE Edition</h3>
       <p style=" font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${edition}</p>
-      <h3 style=" color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">Social Media</h3>
-      <p style=" font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;"><i class="fab fa-twitter"></i><i class="fab fa-twitter"></i>xxxx</p>
-      <a href="${persons[person][6]}" target="_blank" style="text-decoration: none; color: #cdcdcd">
+      <a href="${website}" target="_blank" style="text-decoration: none; color: #cdcdcd">
       <h3 style="color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">
-      <i aria-hidden="true" class="fas fa-link"></i> Website
+      <i aria-hidden="true" class="fa fa-link"></i> Website
       </h3></a>`;
 
       document
@@ -152,3 +154,11 @@ function createCountryWithPersonProfile(countries, persons) {
     }
   }
 }
+
+copyHTML.addEventListener("click", function () {
+  let codeToCopy = contenedorCodigo.innerHTML;
+  textArea.innerText = codeToCopy;
+  console.log(textArea);
+  textArea.select();
+  document.execCommand("Copy");
+});
