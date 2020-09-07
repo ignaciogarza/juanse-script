@@ -89,6 +89,24 @@ const flagUSA =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Estados-Unidos.png";
 const flagVenezuela =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Venezuela.png";
+const flagCyprus =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/Cyprus.png";
+const flagSpain =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/Spain.png";
+const flagKorea =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/South-Korea.png";
+const flagRussia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/russia.png";
+const flagIsrael =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/Israel.png";
+const flagGermany =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/Germany.png";
+const flagGeorgia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/georgia.png";
+const flagEstonia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/estponia.png";
+const flagUK =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/06/14295-NPFGCW.png";
 
 let listCountries = [];
 const attende = [];
@@ -147,7 +165,11 @@ function crateCountryList(country) {
 function drawMenuCountries(countries) {
   for (countrie in countries) {
     if (countries[countrie] !== "" || countries[countrie] == null) {
-      menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
+      if (countries[countrie] === "Other") {
+        menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>International Organizations and Multinational Companies</a></li>`;
+      } else {
+        menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
+      }
     }
   }
 }
@@ -224,10 +246,33 @@ function createCountryWithPersonProfile(countries, persons) {
       flag = flagUruguay;
     } else if (countries[country] === "Venezuela") {
       flag = flagVenezuela;
+    } else if (countries[country] === "Cyprus") {
+      flag = flagCyprus;
+    } else if (countries[country] === "Estonia") {
+      flag = flagEstonia;
+    } else if (countries[country] === "Georgia") {
+      flag = flagGeorgia;
+    } else if (countries[country] === "Germany") {
+      flag = flagGermany;
+    } else if (countries[country] === "Israel") {
+      flag = flagIsrael;
+    } else if (countries[country] === "Russia") {
+      flag = flagRussia;
+    } else if (countries[country] === "South Korea") {
+      flag = flagKorea;
+    } else if (countries[country] === "Spain") {
+      flag = flagSpain;
+    } else if (countries[country] === "United Kingdom") {
+      flag = flagUK;
     }
 
-    countryTitle.innerHTML += `
+    if (countries[country] === "Other") {
+      countryTitle.innerHTML += `
+      <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"></div><div class="pais" style="display: inline-block; vertical-align: top; width:75%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;"  >International Organizations and Multinational Companies</h2></div></div>`;
+    } else {
+      countryTitle.innerHTML += `
     <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"><img src="${flag}" alt="" style="width: 60px; height: 61px"/></div><div class="pais" style="display: inline-block; vertical-align: top; width:75%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;"  >${countries[country]}</h2></div></div>`;
+    }
   }
 
   let liPersonItem;
@@ -244,7 +289,11 @@ function createCountryWithPersonProfile(countries, persons) {
       liPersonItem = document.createElement("li");
       liPersonItem.style.cssText =
         "display:block; border-bottom:2px solid black; padding-bottom:20px; margin-bottom:20px;";
-      liPersonItem.innerHTML = `
+      if (otherCountries.includes(persons[person][1])) {
+        liPersonItem.innerHTML += `<h3 style=" color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;">${persons[person][1]}</h3>`;
+      }
+
+      liPersonItem.innerHTML += `
       <h3 style=" color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Name</h3>
       <p style="font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${name}</p>
       <h3 style="color:#cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Current title</h3>
