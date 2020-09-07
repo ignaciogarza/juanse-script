@@ -6,6 +6,20 @@ const file = document.querySelector("input[type='file']");
 const menuCountries = document.getElementById("itemCountries");
 const countryTitle = document.getElementById("countryTitle");
 
+const otherCountries = [
+  "Development Bank of Latin América (CAF)",
+  "Inter American Development Bank (IDB)",
+  "Caribbean Developent Bank",
+  "Caribbean Developent Bank ",
+  "European Commission",
+  "European Parliament",
+  "Organisation of Eastern Caribbean States (OECS)",
+  "Pan American Development Fundation",
+  "Pan American Development Fundation ",
+  "UN-HABITAT",
+  "Walmart",
+];
+
 // flags
 const flagAntigua =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Antigua-y-Barbuda.png";
@@ -27,6 +41,26 @@ const flagColombia =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Colombia.png";
 const flagCostaRica =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagHonduras =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagJamaica =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagMexico =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Mexico.png";
+const flagNicaragua =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Nicaragua.png";
+const flagPanama =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagParaguay =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagPeru =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+const flagElSalvador =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/El-Salvador.png";
+const flagEcuador =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Ecuador.png";
+const flagDominica =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Dominica.png";
 
 let listCountries = [];
 const attende = [];
@@ -69,7 +103,15 @@ function getInformationFromLines(lines) {
 function crateCountryList(country) {
   if (!listCountries.includes(country)) {
     if (country !== null) {
-      listCountries.push(country);
+      if (otherCountries.includes(country)) {
+        console.log("otro pais:" + country);
+        let otherCountry = "Other";
+        if (!listCountries.includes("Other")) {
+          listCountries.push(otherCountry);
+        }
+      } else {
+        listCountries.push(country);
+      }
     }
   }
 }
@@ -78,7 +120,7 @@ function crateCountryList(country) {
 
 function drawMenuCountries(countries) {
   for (countrie in countries) {
-    menuCountries.innerHTML += `<li style="padding:5px; list-style:none;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
+    menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
   }
 }
 
@@ -108,10 +150,20 @@ function createCountryWithPersonProfile(countries, persons) {
       flag = flagColombia;
     } else if (countries[country] === "Costa Rica") {
       flag = flagCostaRica;
+    } else if (countries[country] === "Honduras") {
+      flag = flagCostaRica;
+    } else if (countries[country] === "El Salvador") {
+      flag = flagElSalvador;
+    } else if (countries[country] === "Ecuador") {
+      flag = flagEcuador;
+    } else if (countries[country] === "Dominica") {
+      flag = flagDominica;
+    } else if (countries[country] === "Mexico") {
+      flag = flagMexico;
     }
 
     countryTitle.innerHTML += `
-    <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"><img src="${flag}" alt="" style="width: 60px; height: 61px"/></div><div class="pais" style="display: inline-block; vertical-align: top; width:90%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;"  >${countries[country]}</h2></div></div>`;
+    <div class="infoPais" id="${countries[country]}" style=" vertical-align: top; padding-bottom: 16px; margin-bottom:40px;" id="contentEvent"><div class="banderaPais" style="display: inline-block"><img src="${flag}" alt="" style="width: 60px; height: 61px"/></div><div class="pais" style="display: inline-block; vertical-align: top; width:75%;" ><h2 style=" font-size: 40px; color: #406181; font-weight: 700; margin: 5px 0 20px 20px; padding: 0;"  >${countries[country]}</h2></div></div>`;
   }
 
   let liPersonItem;
@@ -130,27 +182,33 @@ function createCountryWithPersonProfile(countries, persons) {
       liPersonItem.style.cssText =
         "display:block; border-bottom:2px solid black; padding-bottom:20px; margin-bottom:20px;";
       liPersonItem.innerHTML = `
-      <h3 style=" color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">Name</h3>
+      <h3 style=" color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Name</h3>
       <p style="font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${name}</p>
-      <h3 style="color:#cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">Current title</h3>
+      <h3 style="color:#cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Current title</h3>
       <p style="font-size: 20px; color: #53969e;font-weight: 500; margin-top: 0; padding-top: 0;">${currentTitle}</p> 
       `;
       if (participatedAs) {
-        liPersonItem.innerHTML += `<h3 style="color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">* Participated as</h3>
-      <p style="font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${participatedAs}</p>`;
+        liPersonItem.innerHTML += `<h3 style="color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">* Participated as</h3>
+      <p style="font-size: 20px; font-style:italic; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${participatedAs}</p>`;
       }
 
       liPersonItem.innerHTML += `
-      <h3 style="color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">ACE Edition</h3>
+      <h3 style="color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">ACE Edition</h3>
       <p style=" font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${edition}</p>
       <a href="${website}" target="_blank" style="text-decoration: none; color: #cdcdcd">
-      <h3 style="color: #cdcdcd; font-weight: 400; font-size: 26px; margin-bottom: 0;">
+      <h3 style="color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">
       <i aria-hidden="true" class="fa fa-link"></i> Website
       </h3></a>`;
 
-      document
-        .getElementById(`${persons[person][1]}`)
-        .appendChild(liPersonItem);
+      if (otherCountries.includes(persons[person][1])) {
+        console.log("otro pais:" + country);
+        let otherCountry = "Other";
+        document.getElementById(`Other`).appendChild(liPersonItem);
+      } else {
+        document
+          .getElementById(`${persons[person][1]}`)
+          .appendChild(liPersonItem);
+      }
     }
   }
 }
