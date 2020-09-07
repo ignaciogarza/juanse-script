@@ -41,26 +41,54 @@ const flagColombia =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Colombia.png";
 const flagCostaRica =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
-const flagHonduras =
-  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
 const flagJamaica =
-  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Jamaica.png";
 const flagMexico =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Mexico.png";
 const flagNicaragua =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Nicaragua.png";
 const flagPanama =
-  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Panama.png";
 const flagParaguay =
-  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Paraguay.png";
 const flagPeru =
-  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Costa-Rica.png";
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Peru.png";
 const flagElSalvador =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/El-Salvador.png";
 const flagEcuador =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Ecuador.png";
 const flagDominica =
   "http://riacevents.org/ACE/wp-content/uploads/2020/09/Dominica.png";
+const flagHonduras =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Honduras.png  ";
+const flagGranada =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Grenada.png";
+const flagDomRepublic =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Republica-Dominicana.png";
+const flagGuatemala =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Guatemala.png";
+const flagGuayana =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Guyana.png";
+const flagHaiti =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Haiti.png";
+const flagSaintKits =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Saint-Kitts-y-Nevis.png";
+const flagSaintLucia =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Santa-Lucia.png";
+const flagSaintVincent =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/San-Vicente-y-las-Granadinas.png";
+const flagSuriname =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Suriname.png";
+const flagTrinidad =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Trinidad-y-Tobago.png";
+const flagUruguay =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Uruguay.png";
+const flagBahamas =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Bahamas.png";
+const flagUSA =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Estados-Unidos.png";
+const flagVenezuela =
+  "http://riacevents.org/ACE/wp-content/uploads/2020/09/Venezuela.png";
 
 let listCountries = [];
 const attende = [];
@@ -86,7 +114,6 @@ function getInformationFromLines(lines) {
 
   for (person in attende) {
     if (attende[person][0] === "ACE Edition" || attende[person][0] === "") {
-      console.log("Saltarte el titulo / vacio");
     } else {
       crateCountryList(attende[person][1]);
     }
@@ -104,7 +131,6 @@ function crateCountryList(country) {
   if (!listCountries.includes(country)) {
     if (country !== null) {
       if (otherCountries.includes(country)) {
-        console.log("otro pais:" + country);
         let otherCountry = "Other";
         if (!listCountries.includes("Other")) {
           listCountries.push(otherCountry);
@@ -120,7 +146,9 @@ function crateCountryList(country) {
 
 function drawMenuCountries(countries) {
   for (countrie in countries) {
-    menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
+    if (countries[countrie] !== "" || countries[countrie] == null) {
+      menuCountries.innerHTML += `<li style="padding:5px; display:inline-block; width:200px;"><a href="#${countries[countrie]}" style="color:#123347; text-decoration:none; font-size:20px;"><i class="fa fa-chevron-right"></i>${countries[countrie]}</a></li>`;
+    }
   }
 }
 
@@ -160,6 +188,42 @@ function createCountryWithPersonProfile(countries, persons) {
       flag = flagDominica;
     } else if (countries[country] === "Mexico") {
       flag = flagMexico;
+    } else if (countries[country] == "") {
+      continue;
+    } else if (countries[country] === "Grenada") {
+      flag = flagGranada;
+    } else if (countries[country] === "Dominican Republic") {
+      flag = flagDomRepublic;
+    } else if (countries[country] === "Guatemala") {
+      flag = flagGuatemala;
+    } else if (countries[country] === "Haiti") {
+      flag = flagHaiti;
+    } else if (countries[country] === "Jamaica") {
+      flag = flagJamaica;
+    } else if (countries[country] === "Nicaragua") {
+      flag = flagNicaragua;
+    } else if (countries[country] === "Panama") {
+      flag = flagPanama;
+    } else if (countries[country] === "Paraguay") {
+      flag = flagParaguay;
+    } else if (countries[country] === "Guyana") {
+      flag = flagGuayana;
+    } else if (countries[country] === "Peru") {
+      flag = flagPeru;
+    } else if (countries[country] === "St. Lucia") {
+      flag = flagSaintLucia;
+    } else if (countries[country] === "Suriname") {
+      flag = flagSuriname;
+    } else if (countries[country] === "The Bahamas") {
+      flag = flagBahamas;
+    } else if (countries[country] === "Trinidad and Tobago") {
+      flag = flagTrinidad;
+    } else if (countries[country] === "United States of America") {
+      flag = flagUSA;
+    } else if (countries[country] === "Uruguay") {
+      flag = flagUruguay;
+    } else if (countries[country] === "Venezuela") {
+      flag = flagVenezuela;
     }
 
     countryTitle.innerHTML += `
@@ -167,7 +231,6 @@ function createCountryWithPersonProfile(countries, persons) {
   }
 
   let liPersonItem;
-  console.log(persons);
 
   for (person in persons) {
     if (persons[person][0] === "ACE Edition" || persons[person][0] === "") {
@@ -185,7 +248,7 @@ function createCountryWithPersonProfile(countries, persons) {
       <h3 style=" color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Name</h3>
       <p style="font-size: 20px; color: #53969e; font-weight: 500; margin-top: 0; padding-top: 0;">${name}</p>
       <h3 style="color:#cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">Current title</h3>
-      <p style="font-size: 20px; color: #53969e;font-weight: 500; margin-top: 0; padding-top: 0;">${currentTitle}</p> 
+      <p style="font-size: 20px; color: #53969e;font-weight: 500; margin-top: 0; padding-top: 0;">${currentTitle}</p>
       `;
       if (participatedAs) {
         liPersonItem.innerHTML += `<h3 style="color: #cdcdcd; font-weight: 400; font-size: 16px; margin-bottom: 0;">* Participated as</h3>
@@ -216,7 +279,6 @@ function createCountryWithPersonProfile(countries, persons) {
 copyHTML.addEventListener("click", function () {
   let codeToCopy = contenedorCodigo.innerHTML;
   textArea.innerText = codeToCopy;
-  console.log(textArea);
   textArea.select();
   document.execCommand("Copy");
 });
